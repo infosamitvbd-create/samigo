@@ -1,0 +1,62 @@
+{
+  "entities": {
+    "Movie": {
+      "title": "Movie",
+      "description": "On-demand movie or series content",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "thumbnail": { "type": "string" },
+        "videoUrl": { "type": "string" },
+        "category": { "type": "string" },
+        "type": { "type": "string", "enum": ["movie", "series"] },
+        "year": { "type": "integer" },
+        "duration": { "type": "string" },
+        "rating": { "type": "number" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["title", "videoUrl", "category", "type"]
+    },
+    "Channel": {
+      "title": "Channel",
+      "description": "Live IPTV channel",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "logo": { "type": "string" },
+        "streamUrl": { "type": "string" },
+        "category": { "type": "string" },
+        "isYouTube": { "type": "boolean" },
+        "order": { "type": "integer" }
+      },
+      "required": ["name", "streamUrl", "category"]
+    },
+    "Admin": {
+      "title": "Admin",
+      "description": "Application administrator",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "email": { "type": "string" }
+      },
+      "required": ["uid", "email"]
+    }
+  },
+  "firestore": {
+    "/movies/{movieId}": {
+      "schema": "Movie",
+      "description": "Collection of movies and series"
+    },
+    "/channels/{channelId}": {
+      "schema": "Channel",
+      "description": "Collection of live TV channels"
+    },
+    "/admins/{adminId}": {
+      "schema": "Admin",
+      "description": "Authorized administrators"
+    }
+  }
+}
